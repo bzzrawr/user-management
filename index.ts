@@ -3,9 +3,21 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import healthRoutes from './src/routes/healthRoutes';
-
-const app = express();
+import { myDataSource } from './db';
 dotenv.config({ path: __dirname + '/.env' });
+
+//establish database connection
+myDataSource
+  .initialize()
+  .then(() => {
+    console.log('Data Source has been initialized!');
+  })
+  .catch((err) => {
+    console.error('Error during Data Source initialization:', err);
+  });
+
+// create and setup express
+const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
