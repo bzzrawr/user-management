@@ -3,15 +3,13 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import healthRoutes from './src/routes/healthRoutes';
-import typeormConfig from './typeorm.config';
-import { DataSource } from 'typeorm';
+import userRoutes from './src/routes/userRoutes';
+import dataSource from './typeorm.config';
 
 dotenv.config();
 
 //establish database connection
-const myDataSource = new DataSource(typeormConfig);
-
-myDataSource
+dataSource
   .initialize()
   .then(() => {
     console.log('Data Source has been initialized!');
@@ -32,6 +30,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/health', healthRoutes);
+app.use('/api', userRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
