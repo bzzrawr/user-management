@@ -3,11 +3,11 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: './index.ts',
-  mode: 'development',
+  mode: 'production',
   target: 'node',
   externals: [nodeExternals()],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -21,5 +21,8 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  optimization: {
+    minimize: true,
   },
 };

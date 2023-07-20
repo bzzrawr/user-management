@@ -3,10 +3,14 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import healthRoutes from './src/routes/healthRoutes';
-import { myDataSource } from './db';
-dotenv.config({ path: __dirname + '/.env' });
+import typeormConfig from './typeorm.config';
+import { DataSource } from 'typeorm';
+
+dotenv.config();
 
 //establish database connection
+const myDataSource = new DataSource(typeormConfig);
+
 myDataSource
   .initialize()
   .then(() => {
