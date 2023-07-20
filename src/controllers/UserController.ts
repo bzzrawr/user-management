@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services/UserService';
 import dataSource from '../../typeorm.config';
 import { User } from '../entities/User';
 
