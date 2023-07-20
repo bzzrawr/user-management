@@ -1,4 +1,4 @@
-import { DataSourceOptions } from 'typeorm';
+import { DataSourceOptions, DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -13,8 +13,10 @@ const typeormConfig: DataSourceOptions = {
   synchronize: Boolean(process.env.DB_SYNC),
   logging: false,
   entities: [
-    '../src/entities/*{.ts,.js}', // Path to your entities files
+    __dirname + '/src/entities/*{.ts,.js}', // Path to your entities files
   ],
 };
 
-export default typeormConfig;
+const dataSource = new DataSource(typeormConfig);
+
+export default dataSource;
